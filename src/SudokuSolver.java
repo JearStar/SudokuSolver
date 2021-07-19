@@ -27,6 +27,7 @@ public class SudokuSolver {
         printBoard(board);
     }
 
+    //EFFECTS: prints out a given board
     private static void printBoard(int[][] board) {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int column = 0; column < GRID_SIZE; column++) {
@@ -36,6 +37,7 @@ public class SudokuSolver {
         }
     }
 
+    //EFFECTS: returns true if given number is in a given row
     private static boolean isNumberInRow(int[][] board, int number, int row) {
         for (int i = 0; i < GRID_SIZE; i++) {
             if (board[row][i] == number) {
@@ -45,6 +47,7 @@ public class SudokuSolver {
         return false;
     }
 
+    //EFFECTS: returns true if given number is in a given column
     private static boolean isNumberInColumn(int[][] board, int number, int column) {
         for (int i = 0; i < GRID_SIZE; i++) {
             if (board[i][column] == number) {
@@ -54,6 +57,7 @@ public class SudokuSolver {
         return false;
     }
 
+    //EFFECTS: returns true if given number is in local box
     private static boolean isNumberInBox(int[][] board, int number, int row, int column) {
         int localBoxRow = row - row % 3;
         int localBoxColumn = column - column % 3;
@@ -68,11 +72,14 @@ public class SudokuSolver {
         return false;
     }
 
+    //EFFECTS: returns true if the placement of given number is valid
     private static boolean isPlacementValid(int[][] board, int number, int row, int column) {
         return !(isNumberInRow(board, number, row) || isNumberInColumn(board, number, column) || isNumberInBox(board,
                 number, row, column));
     }
 
+    //MODIFIES: board
+    //EFFECTS: solves a given board and returns true, else returns false
     private static boolean solveBoard(int[][] board) {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int column = 0; column < GRID_SIZE; column++) {
